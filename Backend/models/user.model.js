@@ -1,17 +1,16 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { select } = require('framer-motion/client');
 
 const userSchema = new mongoose.Schema(
     {
-        name: {
-            first: {
+        fullname: {
+            firstname: {
                 type: String,
                 required: [true, 'First name is required'],
                 minlength: [3, 'First name must be at least 3 characters'],
             },
-            last: {
+            lastname: {
                 type: String,
                 minlength: [3, 'Last name must be at least 3 characters'],
             },
@@ -34,8 +33,8 @@ const userSchema = new mongoose.Schema(
 });
 
 
-userSchema.methods.generateAuthToken = async function (password) {
-const token = jwt.sign(
+userSchema.methods.generateAuthToken = function () {
+    const token = jwt.sign(
         { id: this._id },
         process.env.JWT_SECRET,)
         return token;
