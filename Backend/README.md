@@ -130,7 +130,7 @@ Send as JSON:
 
 ### Error Responses
 
-- **Status Code:** `400 Bad Request`
+- ***Status Code:*** `400 Bad Request`
   - Invalid input data (validation errors)
 - **Status Code:** `401 Unauthorized`
   - Invalid email or password
