@@ -22,12 +22,11 @@ const captainSchema = new mongoose.Schema({
         minlength: [5, 'Email must be at least 5 characters'],
     },
     password: {
-        type: String,
-        required: [true, 'Password is required'],
-        unique: true,
-        lowercase:true,
-        // match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/, 'Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, and one number']
-    },
+  type: String,
+  required: [true, 'Password is required'],
+  select: false  // ADD THIS
+},
+
     socketId: {
         type: String,
         // required: true,
