@@ -1,9 +1,15 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
 
 const App = () => {
   return (
-    <div className='bg-red-800 p-4 rounded-lg'>App is here with auth</div>
+    <div>
+      <Route>
+<>
+</>
 
+      </Route>
+       </div>
   )
 }
 
