@@ -1,4 +1,3 @@
-const { select, label } = require('framer-motion/client');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
