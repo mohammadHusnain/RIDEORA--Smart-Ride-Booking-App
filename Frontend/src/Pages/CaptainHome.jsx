@@ -6,25 +6,43 @@ import CaptainDetails from '../components/CaptainDetails'
 import RidePopUp from '../components/RidePopUp'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
+import ConfirmRidePopUp from '../components/ConfirmRidePopup'
 
 const CaptainHome = () => {
 
-  const [ ridePopupPanel, setRidePopupPanel ] = useState(false)
+  const [ ridePopupPanel, setRidePopupPanel ] = useState(true)
+      const [ confirmRidePopupPanel, setConfirmRidePopupPanel ] = useState(false)
+
+
     const ridePopupPanelRef = useRef(null)
+        const confirmRidePopupPanelRef = useRef(null)
 
 
 
-    //  useGSAP(function () {
-    //     if (ridePopupPanel) {
-    //         gsap.to(ridePopupPanelRef.current, {
-    //             transform: 'translateY(0)'
-    //         })
-    //     } else {
-    //         gsap.to(ridePopupPanelRef.current, {
-    //             transform: 'translateY(100%)'
-    //         })
-    //     }
-    // }, [ ridePopupPanel ])
+
+     useGSAP(function () {
+        if (ridePopupPanel) {
+            gsap.to(ridePopupPanelRef.current, {
+                transform: 'translateY(0)'
+            })
+        } else {
+            gsap.to(ridePopupPanelRef.current, {
+                transform: 'translateY(100%)'
+            })
+        }
+    }, [ ridePopupPanel ])
+
+    useGSAP(function () {
+        if (confirmRidePopupPanel) {
+            gsap.to(confirmRidePopupPanelRef.current, {
+                transform: 'translateY(0)'
+            })
+        } else {
+            gsap.to(confirmRidePopupPanelRef.current, {
+                transform: 'translateY(100%)'
+            })
+        }
+    }, [ confirmRidePopupPanel ])
 
 
 
@@ -52,13 +70,19 @@ const CaptainHome = () => {
     <CaptainDetails/>
     </div>
 
-    <div ref={ridePopupPanelRef} className='fixed w-full z-10 bottom-0  bg-white px-3 py-10 pt-12'>
+    <div ref={ridePopupPanelRef} className='fixed w-full z-10 bottom-0 translate-y-full  bg-white px-3 py-10 pt-12'>
                 <RidePopUp
                     // ride={ride}
                     setRidePopupPanel={setRidePopupPanel}
-                    // setConfirmRidePopupPanel={setConfirmRidePopupPanel}
+                    setConfirmRidePopupPanel={setConfirmRidePopupPanel}
                     // confirmRide={confirmRide}
                 />
+            </div>
+
+             <div ref={confirmRidePopupPanelRef} className='fixed w-full h-screen z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-12'>
+                <ConfirmRidePopUp
+                    // ride={ride}
+                    setConfirmRidePopupPanel={setConfirmRidePopupPanel} setRidePopupPanel={setRidePopupPanel} />
             </div>
     
         </div>
