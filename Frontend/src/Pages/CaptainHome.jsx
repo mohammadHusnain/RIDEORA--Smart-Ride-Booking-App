@@ -53,7 +53,7 @@ const CaptainHome = () => {
       <img className='w-16 ' src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="" />
 
               <Link 
-      to="/home" 
+      to="/captain-home" 
       className="  h-10 w-10 bg-white shadow-md flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
       aria-label="Home"
     >

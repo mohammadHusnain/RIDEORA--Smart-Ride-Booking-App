@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 // import { useNavigate } from 'react-router-dom'
 
 const ConfirmRidePopUp = (props) => {
-    
-    const [ otp, setOtp ] = useState('')
+
+    const [otp, setOtp] = useState('')
     // const navigate = useNavigate()
 
     const submitHander = async (e) => {
@@ -61,7 +61,7 @@ const ConfirmRidePopUp = (props) => {
                     <div className='flex items-center gap-5 p-3'>
                         <i className="ri-currency-line"></i>
                         <div>
-                            <h3 className='text-lg font-medium'>₹{props.ride?.fare} </h3>
+                            <h3 className='text-lg font-medium'>Rs {props.ride?.fare} </h3>
                             <p className='text-sm -mt-1 text-gray-600'>Cash Cash</p>
                         </div>
                     </div>
@@ -71,7 +71,7 @@ const ConfirmRidePopUp = (props) => {
                     <form onSubmit={submitHander}>
                         <input value={otp} onChange={(e) => setOtp(e.target.value)} type="text" className='bg-[#eee] px-6 py-4 font-mono text-lg rounded-lg w-full mt-3' placeholder='Enter OTP' />
 
-                        <button className='w-full mt-5 text-lg flex justify-center bg-green-600 text-white font-semibold p-3 rounded-lg'>Confirm</button>
+                        <Link to="/captain-riding" className='w-full mt-5 text-lg flex justify-center bg-green-600 text-white font-semibold p-3 rounded-lg'>Confirm</Link>
                         <button onClick={() => {
                             props.setConfirmRidePopupPanel(false)
                             props.setRidePopupPanel(false)
