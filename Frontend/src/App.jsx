@@ -30,6 +30,8 @@ const App = () => {
 <Route path='/captain-login'  element={<CaptainLogin />}/>
 <Route path='/captain-home' element={<UserProtectWrapper> <CaptainHome/> </UserProtectWrapper>} />
 <Route path='/captain-riding'  element={<CaptainRiding />}/>
+
+
  
  </Routes>
 
