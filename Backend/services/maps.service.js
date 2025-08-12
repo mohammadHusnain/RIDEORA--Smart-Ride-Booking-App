@@ -1,20 +1,22 @@
-module.exports.getAddressCoordinate = async (address) => {
-    const apiKey = process.env.GOOGLE_MAPS_API;
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`;
+const axios = require('axios');
 
+module.exports.getAddressCoordinate = async (address) => {
     try {
+        const apiKey = process.env.GOOGLE_MAPS_API; // This is your LocationIQ key for now
+        const url = `https://us1.locationiq.com/v1/search?key=${apiKey}&q=${encodeURIComponent(address)}&format=json`;
+
         const response = await axios.get(url);
-        if (response.data.status === 'OK') {
-            const location = response.data.results[ 0 ].geometry.location;
+
+        if (response.data && response.data.length > 0) {
             return {
-                ltd: location.lat,
-                lng: location.lng
+                latitude: response.data[0].lat,
+                longitude: response.data[0].lon
             };
-        } else {
-            throw new Error('Unable to fetch coordinates');
         }
+
+        return null;
     } catch (error) {
-        console.error(error);
+        console.error("Error in getAddressCoordinate:", error.message);
         throw error;
     }
-}
+};
