@@ -459,3 +459,210 @@ Authorization: Bearer <JWT token>
 
 ---
 
+## Endpoint: `/rides/create`
+
+### Description
+
+Creates a new ride request for the authenticated user. This endpoint validates the pickup and destination addresses, ensures the selected vehicle type is supported, and associates the ride with the requesting user. It returns the created ride details and a confirmation message.
+
+### Method
+
+`POST`
+
+### Request Headers
+
+- `Authorization: Bearer <JWT token>` (or cookie named `token`)
+
+### Request Body
+
+Send as JSON:
+```json
+{
+  "userId": "USER_ID_STRING",
+  "pickup": "123 Main St, City",
+  "destination": "456 Park Ave, City",
+  "vehicleType": "car"
+}
+```
+- `userId`: string, required, user’s unique ID
+- `pickup`: string, required, minimum 3 characters
+- `destination`: string, required, minimum 3 characters
+- `vehicleType`: string, required, must be one of `auto`, `car`, `moto`
+
+### Success Response
+
+- **Status Code:** `201 Created`
+- **Body:**
+```json
+{
+  "message": "Ride created successfully",
+  "ride": {
+    "_id": "...",
+    "user": "...",
+    "pickup": "123 Main St, City",
+    "destination": "456 Park Ave, City",
+    "vehicleType": "car",
+    "fare": "Rs: 225"
+    // ...other fields
+  }
+}
+```
+
+### Error Responses
+
+- **Status Code:** `400 Bad Request`
+  - Validation errors (invalid or missing fields)
+- **Status Code:** `500 Internal Server Error`
+  - Server/database error
+
+### Example Request (Postman)
+```
+POST http://localhost:4000/rides/create
+Authorization: Bearer <JWT token>
+Content-Type: application/json
+
+{
+  "userId": "64f1c2e9b7e2a1a2b3c4d5e6",
+  "pickup": "123 Main St, City",
+  "destination": "456 Park Ave, City",
+  "vehicleType": "car"
+}
+```
+
+---
+
+## Endpoint: `/maps/get-coordinates`
+
+### Description
+
+Retrieves the latitude and longitude for a given address. This endpoint is useful for converting a human-readable address into geographic coordinates, which can then be used for mapping or distance calculations.
+
+### Method
+
+`GET`
+
+### Request Headers
+
+- `Authorization: Bearer <JWT token>` (or cookie named `token`)
+
+### Query Parameters
+
+- `address`: string, required, minimum 3 characters
+
+### Success Response
+
+- **Status Code:** `200 OK`
+- **Body:**
+```json
+{
+  "lat": 28.7041,
+  "lng": 77.1025
+}
+```
+
+### Error Responses
+
+- **Status Code:** `400 Bad Request`
+  - Validation errors or missing address
+- **Status Code:** `500 Internal Server Error`
+  - Error fetching coordinates
+
+### Example Request (Postman)
+```
+GET http://localhost:4000/maps/get-coordinates?address=COMSATS%20University
+Authorization: Bearer <JWT token>
+```
+
+---
+
+## Endpoint: `/maps/get-distance-time`
+
+### Description
+
+Calculates the distance and estimated travel time between two locations. This endpoint is helpful for fare estimation and route planning, using the provided origin and destination addresses.
+
+### Method
+
+`GET`
+
+### Request Headers
+
+- `Authorization: Bearer <JWT token>` (or cookie named `token`)
+
+### Query Parameters
+
+- `origin`: string, required, minimum 3 characters
+- `destination`: string, required, minimum 3 characters
+
+### Success Response
+
+- **Status Code:** `200 OK`
+- **Body:**
+```json
+{
+  "distance": "12 km",
+  "duration": "25 mins"
+}
+```
+
+### Error Responses
+
+- **Status Code:** `400 Bad Request`
+  - Validation errors or missing parameters
+- **Status Code:** `500 Internal Server Error`
+  - Error fetching distance and time
+
+### Example Request (Postman)
+```
+GET http://localhost:4000/maps/get-distance-time?origin=COMSATS%20University&destination=Liberty%20Market
+Authorization: Bearer <JWT token>
+```
+
+---
+
+## Endpoint: `/maps/get-suggestions`
+
+### Description
+
+Provides autocomplete suggestions for location input. This endpoint helps users quickly find and select addresses or places as they type, improving the user experience for entering pickup or destination locations.
+
+### Method
+
+`GET`
+
+### Request Headers
+
+- `Authorization: Bearer <JWT token>` (or cookie named `token`)
+
+### Query Parameters
+
+- `input`: string, required, minimum 3 characters
+
+### Success Response
+
+- **Status Code:** `200 OK`
+- **Body:**
+```json
+[
+  "COMSATS University, Defence Road, Lahore",
+  "Gulberg III, Near Liberty Market, Lahore",
+  "Johar Town, Near Expo Center, Lahore"
+]
+```
+
+### Error Responses
+
+- **Status Code:** `400 Bad Request`
+  - Validation errors or missing input
+- **Status Code:** `500 Internal Server Error`
+  - Error fetching suggestions
+
+### Example Request (Postman)
+```
+GET http://localhost:4000/maps/get-suggestions?input=COMSATS
+Authorization: Bearer <JWT token>
+```
+
+
+
+
