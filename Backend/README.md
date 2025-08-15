@@ -529,6 +529,49 @@ Content-Type: application/json
 }
 ```
 
+
+
+---
+
+## Endpoint: `/rides/get-fare`
+
+### Description
+Calculates and returns the fare for a ride based on the provided pickup and destination addresses. The fare is computed for different vehicle types (e.g., auto, car, moto) based on the travel distance and duration.
+
+### Method
+`GET`
+
+### Request Headers
+- `Authorization: Bearer <JWT token>` (or cookie named `token`)
+
+### Query Parameters
+- `pickup`: string, required, minimum 3 characters, the starting address.
+- `destination`: string, required, minimum 3 characters, the destination address.
+
+### Success Response
+- **Status Code:** `200 OK`
+- **Body:**
+```json
+{
+  "auto": 45,
+  "car": 60,
+  "moto": 35
+}
+```
+*(Note: The returned fare values are calculated based on dynamic distance and duration data.)*
+
+### Error Responses
+- **Status Code:** `400 Bad Request`  
+  - Validation errors such as missing or invalid query parameters.
+- **Status Code:** `500 Internal Server Error`  
+  - An error occurred during fare calculation.
+
+### Example Request (Postman)
+```
+GET http://localhost:4000/rides/get-fare?pickup=123%20Main%20St,%20City&destination=456%20Park%20Ave,%20City
+Authorization: Bearer <JWT token>
+```
+
 ---
 
 ## Endpoint: `/maps/get-coordinates`
