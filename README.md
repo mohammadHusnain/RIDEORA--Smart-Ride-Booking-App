@@ -1,0 +1,1 @@
+Rideora is a modern ride-hailing app built with the MERN stack. It offers real-time tracking via Socket.io and Google Maps API, secure auth, dynamic fare calculation, and online payments. Designed for seamless user-driver interaction, Rideora delivers fast, scalable, and smooth urban travel
