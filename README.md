@@ -2,6 +2,7 @@ Rideora is a modern ride-hailing app built with the MERN stack. It offers real-t
 
 
 1. Technology Stack (MERN)
+
 MongoDB: A flexible NoSQL database storing user profiles, ride details, driver info, and location data. Ensures quick retrieval and scalability.
 
 Express.js: Powers the backend RESTful APIs, handling ride requests, authentication, and data processing between React and Node.js.
@@ -54,6 +55,7 @@ Messaging via Socket.io or voice calls (Twilio integration) for coordination.
 
 
 3. Admin Dashboard
+   
 Analytics: Monitor ride volumes, revenue trends, and user growth.
 
 Driver Management: Approve/reject drivers, resolve disputes, and track performance.
@@ -61,7 +63,11 @@ Driver Management: Approve/reject drivers, resolve disputes, and track performan
 Support System: Handle user complaints and feedback.
 
 Key Advantages of Rideora
+
 🚗 Real-Time Precision: Live tracking minimizes wait times and confusion.
+
 🔒 Safety First: Secure auth and encrypted data protect users.
+
 💬 Seamless Communication: In-app chat ensures smooth coordination.
+
 📊 Data-Driven: Admins gain insights to optimize operations.
