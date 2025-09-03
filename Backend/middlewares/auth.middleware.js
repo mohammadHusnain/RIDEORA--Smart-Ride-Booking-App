@@ -50,11 +50,11 @@ module.exports.authCaptain = async (req, res, next) => {
         const captain = await captainModel.findById(decoded.id);
         req.captain = captain;
 
-        // if (!captain) {
-        //     return res.status(404).json({ message: 'Captain not found' });
-        // }
+        if (!captain) {
+            return res.status(404).json({ message: 'Captain not found' });
+        }
 
-        // req.captain = captain;
+        req.captain = captain;
         return next();
     } catch (err) {
         return res.status(401).json({ message: 'Unauthorized' });

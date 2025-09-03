@@ -8,6 +8,7 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import ConfirmRidePopUp from '../components/ConfirmRidePopup'
 
+
 const CaptainHome = () => {
 
   const [ ridePopupPanel, setRidePopupPanel ] = useState(true)
