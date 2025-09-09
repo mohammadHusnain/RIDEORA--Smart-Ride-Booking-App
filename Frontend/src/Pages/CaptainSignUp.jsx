@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
 import { CaptainDataContext } from '../context/CaptainContext'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const CaptainSignup = () => {
@@ -45,7 +45,7 @@ const CaptainSignup = () => {
       const data = response.data
       setCaptain(data.captain)
       localStorage.setItem('token', data.token)
-      navigate('/captain-home')
+      navigate('/captain-login')
     }
 
     setEmail('')
@@ -61,7 +61,7 @@ const CaptainSignup = () => {
   return (
     <div className='py-5 px-5 h-screen flex flex-col justify-between'>
       <div>
-        <img className='w-20 mb-3' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB7JU0LGsmFGSDWCKLoxTryMn6GjpDIhPklWbERkLklVSX4mIhahu1T-_3EMu4NTjp7nk&usqp=CAU" alt="" />
+        <img className='w-20 mb-3' src="https://www.svgrepo.com/show/505031/uber-driver.svg" alt="" />
 
         <form onSubmit={(e) => {
           submitHandler(e)
