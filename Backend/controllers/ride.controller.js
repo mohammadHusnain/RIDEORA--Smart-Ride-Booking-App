@@ -19,7 +19,8 @@ module.exports.createRide = async (req, res) => {
 
         const pickupCoordinates = await mapService.getAddressCoordinate(pickup);
 
-
+const latitude = pickupCoordinates.lat || pickupCoordinates.ltd;
+const longitude = pickupCoordinates.lng || pickupCoordinates.lng;
 
         const captainsInRadius = await mapService.getCaptainsInTheRadius(pickupCoordinates.ltd, pickupCoordinates.lng, 2);
 
@@ -35,6 +36,9 @@ module.exports.createRide = async (req, res) => {
             })
 
         })
+
+        return res.status(201).json(rideWithUser);
+
 
     } catch (err) {
 

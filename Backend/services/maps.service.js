@@ -123,20 +123,21 @@ module.exports.getAutoCompleteSuggestions = async (input) => {
 };
 
 
-module.exports.getCaptainsInTheRadius = async (ltd , lng , radius) => {
-    
+module.exports.getCaptainsInTheRadius = async (ltd, lng, radius) => {
+    if (ltd == null || lng == null) {
+        throw new Error("Latitude and Longitude are required");
+    }
 
-        const captains = await captainModel.find({
-            location: {
-                $geoWithin: {
-                    $centerSphere: [
-                        [ltd, lng],
-                        radius / 6378.1
-                    ]
-                }
+    // radius in km
+    const captains = await captainModel.find({
+        "location.ltd": { $exists: true, $ne: null },
+        "location.lng": { $exists: true, $ne: null },
+        location: {
+            $geoWithin: {
+                $centerSphere: [ [ lng, ltd ], radius / 6371 ]  // NOTE: [lng, lat]
             }
-        });
+        }
+    });
 
-        return captains;
-   
+    return captains;
 };
