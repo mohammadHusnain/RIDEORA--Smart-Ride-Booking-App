@@ -2,25 +2,26 @@ const captainModel = require('../models/captain.model');
 const axios = require('axios');
 
 module.exports.getAddressCoordinate = async (address) => {
-    try {
-        const apiKey = process.env.GOOGLE_MAPS_API; // This is your LocationIQ key for now
-        const url = `https://us1.locationiq.com/v1/search?key=${apiKey}&q=${encodeURIComponent(address)}&format=json`;
+  try {
+    const apiKey = process.env.GOOGLE_MAPS_API;
+    const url = `https://us1.locationiq.com/v1/search?key=${apiKey}&q=${encodeURIComponent(address)}&format=json`;
 
-        const response = await axios.get(url);
+    const response = await axios.get(url);
 
-        if (response.data && response.data.length > 0) {
-            return {
-                latitude: response.data[0].lat,
-                longitude: response.data[0].lon
-            };
-        }
-
-        return null;
-    } catch (error) {
-        console.error("Error in getAddressCoordinate:", error.message);
-        throw error;
+    if (response.data && response.data.length > 0) {
+      return {
+        lat: Number(response.data[0].lat),   // convert to number
+        lng: Number(response.data[0].lon)    // convert to number
+      };
     }
+
+    throw new Error("No coordinates found for the given address");
+  } catch (error) {
+    console.error("Error in getAddressCoordinate:", error.message);
+    throw new Error("Failed to fetch coordinates");
+  }
 };
+
 
 
 
@@ -123,21 +124,20 @@ module.exports.getAutoCompleteSuggestions = async (input) => {
 };
 
 
-module.exports.getCaptainsInTheRadius = async (ltd, lng, radius) => {
-    if (ltd == null || lng == null) {
-        throw new Error("Latitude and Longitude are required");
-    }
+module.exports.getCaptainsInTheRadius = async (lat, lng, radius) => {
 
     // radius in km
+
+
     const captains = await captainModel.find({
-        "location.ltd": { $exists: true, $ne: null },
-        "location.lng": { $exists: true, $ne: null },
         location: {
             $geoWithin: {
-                $centerSphere: [ [ lng, ltd ], radius / 6371 ]  // NOTE: [lng, lat]
+                $centerSphere: [ [ lat, lng ], radius / 6371 ]
             }
         }
     });
 
     return captains;
-};
+
+
+}

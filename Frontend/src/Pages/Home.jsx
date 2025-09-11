@@ -249,7 +249,7 @@ async function createRide() {
 
       <div className='h-screen w-screen'>
         {/* image for temporary use  */}
-        <img className='h-full w-full object-full' src="https://i.pinimg.com/736x/62/df/ef/62dfefc5b636ec353ed1efb026491e52.jpg" alt="maps image" />
+                <img className='h-full w-full object-cover' src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif" alt="" />
       </div>
 
       <div className=" flex flex-col justify-end h-screen absolute top-0 w-full ">

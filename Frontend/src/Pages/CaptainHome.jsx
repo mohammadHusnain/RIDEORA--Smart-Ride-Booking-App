@@ -34,7 +34,7 @@ const CaptainHome = () => {
                     socket.emit('update-location-captain', {
                         userId: captain._id,
                         location: {
-                            ltd: position.coords.latitude,
+                            lat: position.coords.latitude,
                             lng: position.coords.longitude
                         }
                     })
@@ -49,7 +49,7 @@ const CaptainHome = () => {
     }, [])
 
     socket.on('new-ride', (data) => {
-
+        console.log(data);
         setRide(data)
         setRidePopupPanel(true)
 
